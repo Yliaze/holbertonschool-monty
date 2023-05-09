@@ -11,7 +11,9 @@ char ** cut_line(char **line)
 	line[counter] = strtok(line[counter], " $");
 
 	while (line[counter])
+	{
 		counter += 1;	
-	line[counter] = strtok(NULL, " $")
-		return (line);
+		line[counter] = strtok(NULL, " $");
+	}
+	return (line);
 }

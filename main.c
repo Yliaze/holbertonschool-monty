@@ -20,11 +20,12 @@ int main(int argc, char** argv)
 	}
 
 	line = malloc(buffsize * sizeof(char));
-	if (buffer == NULL)
+	if (buffsize == 0)
 	{
-		perror("Could not initate buffer")
+		perror("Could not initate buffer");
+		return (0);
 	}
-	while ((read = getline(&line,&buffsize, fptr)) =! -1);
+	while ((read = getline(&*line,&buffsize, fptr)) != -1);
 	{
 		line_counter++;
 		line = cut_line(line);
@@ -33,8 +34,9 @@ int main(int argc, char** argv)
 	fclose(fptr);
 	if (line)
 	{
-		free(line)
+		free(line);
 	}
 	printf(" nombre de lignes : %d", line_counter);
 	exit(EXIT_SUCCESS);
 }
+
