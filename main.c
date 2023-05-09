@@ -32,7 +32,9 @@ int main(int argc, char** argv)
 	}
 	fclose(fptr);
 	if (line)
+	{
 		free(line)
-
-			exit(EXIT_SUCCESS);
+	}
+	printf(" nombre de lignes : %d", line_counter);
+	exit(EXIT_SUCCESS);
 }
