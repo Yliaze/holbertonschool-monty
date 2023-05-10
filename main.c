@@ -5,8 +5,12 @@ int main(int argc, char** argv)
 	FILE *fptr = NULL;
 	char** line = NULL;
 	size_t buffsize = 32;
-	ssize_t read = 0;
+	size_t read = 0;
 	int line_counter = 0;
+	stack_t *new_node = NULL;
+
+
+	//stack = malloc(sizeof(stack_t));
 
 	fptr = fopen(argv[1], "r");
 	if (fptr == NULL)
@@ -30,6 +34,20 @@ int main(int argc, char** argv)
 		line_counter++;
 		line = cut_line(line);
 		op_exec(line);
+
+	
+
+	new_node = malloc(sizeof(stack_t));
+	if (new_node == NULL)
+	{
+		return;
+	}
+
+	new_node->n = iline;
+	new_node->prev = NULL;
+	new_node->next = NULL;
+
+
 	}
 	fclose(fptr);
 	if (line)
@@ -40,3 +58,30 @@ int main(int argc, char** argv)
 	exit(EXIT_SUCCESS);
 }
 
+
+int op_exec(char **line)
+{
+	int counter = 0;
+
+	instruction_t op_select[] = {
+		{"push", _push},
+		/*{"pall", _pall},
+		 *{"pint", _pint},
+		 *{"pop", _pop},
+		 *{"swap", _swap},
+		 *{"add", _add},
+		 *{"nop", _nop},**/
+		{"\0", NULL}
+	};
+
+	while (op_select[counter].opcode != "\0")
+	{
+		if (strcmp(op_select[counter].opcode, line[0]) == 0)
+		{
+			op_select[counter].f(line[1]);
+			break;
+		}
+		counter++;
+	}
+	return (0);
+}

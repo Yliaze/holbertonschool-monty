@@ -3,18 +3,18 @@
 /**
  *  *
  *   */
-int op_exec(char **line)
+/*int op_exec(char **line)
 {
 	int counter = 0;
 
 	instruction_t op_select[] = {
 		{"push", _push},
 		/*{"pall", _pall},
-		 *     {"pint", _pint},
-		 *         {"pop", _pop},
-		 *             {"swap", _swap},
-		 *                 {"add", _add},
-		 *                     {"nop", _nop},**/
+		 *{"pint", _pint},
+		 *{"pop", _pop},
+		 *{"swap", _swap},
+		 *{"add", _add},
+		 *{"nop", _nop},
 		{"\0", NULL}
 	};
 
@@ -28,5 +28,5 @@ int op_exec(char **line)
 		counter++;
 	}
 	return (0);
-}
+}**/
 
