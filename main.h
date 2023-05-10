@@ -47,7 +47,8 @@ void _pop(stack_t **stack, unsigned int line_number);
 void _swap(stack_t **stack, unsigned int line_number);
 void _add(stack_t **stack, unsigned int line_number);
 void _nop(stack_t **stack, unsigned int line_number);
-int op_exec(char **line);
+int op_exec(char *line, int n, unsigned int line_number);
+stack_t **create_node(int n);
 
 #endif
 

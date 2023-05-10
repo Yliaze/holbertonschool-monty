@@ -4,10 +4,11 @@ int main(int argc, char** argv)
 {
 	FILE *fptr = NULL;
 	char** line = NULL;
+	int iline = 0;
 	size_t buffsize = 32;
 	size_t read = 0;
-	int line_counter = 0;
-	stack_t *new_node = NULL;
+	int line_number = 0;
+	stack_t **new_node = NULL;
 
 
 	//stack = malloc(sizeof(stack_t));
@@ -23,43 +24,31 @@ int main(int argc, char** argv)
 		EXIT_FAILURE;
 	}
 
-	line = malloc(buffsize * sizeof(char));
 	if (buffsize == 0)
 	{
 		perror("Could not initate buffer");
 		return (0);
 	}
+	line = malloc(buffsize * sizeof(char));
 	while ((read = getline(&*line,&buffsize, fptr)) != -1);
 	{
-		line_counter++;
+		line_number++;
 		line = cut_line(line);
-		op_exec(line);
-
-	
-
-	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
-	{
-		return;
-	}
-
-	new_node->n = iline;
-	new_node->prev = NULL;
-	new_node->next = NULL;
-
-
+		iline = atoi(line[1]);
+		new_node = create_node(iline);
+		op_exec(line[0], iline, line_number);
 	}
 	fclose(fptr);
 	if (line)
 	{
 		free(line);
 	}
-	printf(" nombre de lignes : %d", line_counter);
+	printf(" nombre de lignes : %d", line_number);
 	exit(EXIT_SUCCESS);
 }
 
 
-int op_exec(char **line)
+int op_exec(char *line, int n, unsigned int line_number)
 {
 	int counter = 0;
 
@@ -76,9 +65,9 @@ int op_exec(char **line)
 
 	while (op_select[counter].opcode != "\0")
 	{
-		if (strcmp(op_select[counter].opcode, line[0]) == 0)
+		if (strcmp(op_select[counter].opcode, line) == 0)
 		{
-			op_select[counter].f(line[1]);
+			op_select[counter].f(stack, line_number);
 			break;
 		}
 		counter++;
