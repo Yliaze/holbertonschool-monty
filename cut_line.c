@@ -14,9 +14,9 @@ char **cut_line(char *line)
 	char **save_token;
 	int counter = 0;
 
-	save_token = malloc(3 * sizeof(char*));
+	save_token = calloc(3, sizeof(char*));
 
-	char *token = strtok(line, " $");
+	char *token = strtok(line, " ");
 
 	while (token != NULL)
 	{	
@@ -26,7 +26,7 @@ char **cut_line(char *line)
 			//free_arr (save_token);
 			//print une error
 		//}
-		token = strtok(NULL, " $");
+		token = strtok(NULL, " ");
 		counter++;
 	}
 	save_token[counter] = NULL;

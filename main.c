@@ -33,13 +33,14 @@ int main(int argc, char** argv)
 	char* line = NULL;
 	int iline = 0;
 	size_t buffsize = 0;
-	size_t read = 0;
+	int read = 0;
 	int line_number = 0;
 	stack_t *new_node = NULL;
 	int counter = 0;
 	char **token;
 
 	fptr = fopen(argv[1], "r");
+
 	if (fptr == NULL)
 	{
 		//fclose(fptr);
@@ -50,31 +51,22 @@ int main(int argc, char** argv)
 		exit(EXIT_FAILURE);
 	}
 
-	if (buffsize == 0)
-	{
-		perror("Could not initate buffer");
-		return (0);
-	}
 
-	line = calloc(sizeof(char), buffsize);
 	
 	while ((read = getline(&line,&buffsize, fptr)) != -1)
 	{
-		line_number++;
+		line_number++;	
 		token = cut_line(line);
-		//while (line[1][counter] != "\0")
-		//{
-		iline = *token[1] + 0;
-		//}
-		new_node = create_node(iline);
+		iline = atoi(token[1]);
+		new_node = create_node(iline);		
 		op_exec(new_node, line, iline, line_number);
 	}
+
 	fclose(fptr);
 	if (line)
 	{
 		free(line);
 	}
-	printf("nombre de lignes : %d", line_number);
 	exit(EXIT_SUCCESS);
 }
 
