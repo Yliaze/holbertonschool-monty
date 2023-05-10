@@ -30,9 +30,9 @@ int op_exec(stack_t *new_node, char *line, int n, unsigned int line_number)
 int main(int argc, char** argv)
 {
 	FILE *fptr = NULL;
-	char** line = NULL;
+	char* line = NULL;
 	int iline = 0;
-	size_t buffsize = 512;
+	size_t buffsize = 0;
 	size_t read = 0;
 	int line_number = 0;
 	stack_t *new_node = NULL;
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
 
 	line = calloc(sizeof(char), buffsize);
 	
-	while ((read = getline(line,&buffsize, fptr)) != -1)
+	while ((read = getline(&line,&buffsize, fptr)) != -1)
 	{
 		line_number++;
 		token = cut_line(line);
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
 		iline = *token[1] + 0;
 		//}
 		new_node = create_node(iline);
-		op_exec(new_node, line[0], iline, line_number);
+		op_exec(new_node, line, iline, line_number);
 	}
 	fclose(fptr);
 	if (line)

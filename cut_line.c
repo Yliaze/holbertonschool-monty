@@ -8,25 +8,27 @@
 * Return: An array of strings representing the tokens.
 **/
 
-char **cut_line(char **line)
+char **cut_line(char *line)
 {
 	//int counter = 0;
-	char *token;
 	char **save_token;
 	int counter = 0;
 
-	token = strtok(*line, " $");
+	save_token = malloc(3 * sizeof(char*));
+
+	char *token = strtok(line, " $");
 
 	while (token != NULL)
 	{	
 		save_token[counter] = strdup(token);
-		if (save_token[counter] == NULL)
-		{
+		//if (save_token[counter] == NULL)
+		//{
 			//free_arr (save_token);
 			//print une error
-		}
+		//}
 		token = strtok(NULL, " $");
 		counter++;
 	}
+	save_token[counter] = NULL;
 	return (save_token);
 }
