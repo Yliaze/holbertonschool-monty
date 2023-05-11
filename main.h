@@ -22,7 +22,7 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-extern stack_t stack;
+extern stack_t *global_stack;
 
 /**
  * struct instruction_s - opcode and its function
@@ -46,7 +46,7 @@ void _pop(stack_t **stack, unsigned int line_number);
 void _swap(stack_t **stack, unsigned int line_number);
 void _add(stack_t **stack, unsigned int line_number);
 void _nop(stack_t **stack, unsigned int line_number);
-int op_exec(stack_t *new_node, char *line, int n, unsigned int line_number);
+int op_exec(stack_t *new_node, char *line, unsigned int line_number);
 stack_t *create_node(int n);
 
 #endif

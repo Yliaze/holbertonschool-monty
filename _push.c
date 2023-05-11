@@ -1,23 +1,24 @@
 #include "main.h"
 
 /**
- *  *
- *   */
-
+ * _push - pushes an element to the stack
+ * @stack: double pointer to the stack
+ * @line_number: line number of the command
+ */
 void _push(stack_t **stack, unsigned int line_number)
 {
 	(void) line_number;
-	stack_t *new_node = NULL;
 
-	if((*stack)->next != NULL)
-	{
-		new_node->next = *stack;
-		(*stack)->prev = new_node;
-		*stack = new_node;  
-	}
+	// global_stack = *global_stack;
+	if(global_stack->next == NULL)
+		{
+			global_stack = *stack;
+			printf("ça marche = %d\n", global_stack->n);
+		}
 	else 
-	{
-		/*free(stack);**/
-		*stack = new_node;
-	}
+		{
+			(*stack)->next = global_stack;
+			*stack = global_stack; 
+			/*free(stack);**/
+		}
 }

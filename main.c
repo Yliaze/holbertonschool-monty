@@ -1,13 +1,15 @@
 #include "main.h"
 
-int op_exec(stack_t *new_node, char *line, int n, unsigned int line_number)
+stack_t *global_stack;
+
+int op_exec(stack_t *new_node, char *line, unsigned int line_number)
 {
 	int counter = 0;
 
 	instruction_t op_select[] = {
 		{"push", _push},
-		/*{"pall", _pall},
-		 *{"pint", _pint},
+		{"pall", _pall},
+		 /*{"pint", _pint},
 		 *{"pop", _pop},
 		 *{"swap", _swap},
 		 *{"add", _add},
@@ -19,6 +21,7 @@ int op_exec(stack_t *new_node, char *line, int n, unsigned int line_number)
 	{
 		if (strcmp(op_select[counter].opcode, line) == 0)
 		{
+			printf("instruction trouvée\n");
 			op_select[counter].f(&new_node, line_number);
 			break;
 		}
@@ -30,15 +33,16 @@ int op_exec(stack_t *new_node, char *line, int n, unsigned int line_number)
 int main(int argc, char** argv)
 {
 	FILE *fptr = NULL;
-	char* line = NULL;
-	int iline = 0;
+	char *line = NULL, **token;
+	int iline = 0, read = 0, line_number = 0, counter = 0;
 	size_t buffsize = 0;
-	int read = 0;
-	int line_number = 0;
 	stack_t *new_node = NULL;
-	int counter = 0;
-	char **token;
 
+	global_stack = calloc(3, sizeof(stack_t));
+	global_stack->n = 0;
+	global_stack->next = NULL;
+	global_stack->prev = NULL;
+	
 	fptr = fopen(argv[1], "r");
 
 	if (fptr == NULL)
@@ -48,25 +52,40 @@ int main(int argc, char** argv)
 	}
 	if (argv[1] == NULL || fptr == NULL)
 	{
+		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
-
-	
 	while ((read = getline(&line,&buffsize, fptr)) != -1)
 	{
+	
 		line_number++;	
+		
 		token = cut_line(line);
-		iline = atoi(token[1]);
-		new_node = create_node(iline);		
-		op_exec(new_node, line, iline, line_number);
-	}
 
+		printf("avant atoi\n");
+		
+		if (token[1])
+		{
+			iline = atoi(token[1]);
+		}
+		printf("line = %s\n", line);
+		printf("après atoi\n");
+
+		new_node = create_node(iline);
+		printf("après create_node\n");
+		printf("new_node->n = %d\n", new_node->n);
+		
+		op_exec(new_node, line, line_number);
+		printf("après op_exec\n");
+		
+	}
 	fclose(fptr);
 	if (line)
 	{
 		free(line);
 	}
+	printf("nombre de lignes : %d\n", line_number);
 	exit(EXIT_SUCCESS);
 }
 
