@@ -14,10 +14,10 @@ int op_exec(stack_t *new_node, char *line, unsigned int line_number)
 		 *{"swap", _swap},
 		 *{"add", _add},
 		 *{"nop", _nop},**/
-		{"\0", NULL}
+		{'\0', NULL}
 	};
 
-	while (op_select[counter].opcode != "\0")
+	while (op_select[counter].opcode != NULL)
 	{
 		if (strcmp(op_select[counter].opcode, line) == 0)
 		{
@@ -31,9 +31,10 @@ int op_exec(stack_t *new_node, char *line, unsigned int line_number)
 
 int main(int argc, char** argv)
 {
+	(void) argc;
 	FILE *fptr = NULL;
 	char *line = NULL, **token;
-	int iline = 0, read = 0, line_number = 0, counter = 0;
+	int iline = 0, read = 0, line_number = 0;
 	size_t buffsize = 0;
 	stack_t *new_node = NULL;
 

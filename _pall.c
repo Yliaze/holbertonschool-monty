@@ -8,6 +8,8 @@
  */
 void _pall(stack_t **stack, unsigned int ligne_number)
 {
+    (void) ligne_number;
+    (void) stack;
     stack_t *tmp = NULL;
 
     tmp = global_stack;
