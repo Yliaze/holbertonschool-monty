@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * create_node - Creates a new node for a doubly linked list.

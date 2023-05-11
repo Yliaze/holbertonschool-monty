@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
 * cut_line - Splits a string into tokens using delimiters.
