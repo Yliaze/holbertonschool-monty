@@ -26,6 +26,5 @@ void _pall(stack_t **stack, unsigned int ligne_number)
             printf("totota\n");
             }
         }
-    global_stack = tmp;
     printf("tototor\n");
 }

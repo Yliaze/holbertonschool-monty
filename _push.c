@@ -9,16 +9,14 @@ void _push(stack_t **stack, unsigned int line_number)
 {
 	(void) line_number;
 
-	// global_stack = *global_stack;
-	if(global_stack->next == NULL)
+	if(global_stack->n == 0)
 		{
-			global_stack = *stack;
+			global_stack->n = (*stack)->n;
 			printf("ça marche = %d\n", global_stack->n);
 		}
 	else 
 		{
 			(*stack)->next = global_stack;
-			*stack = global_stack; 
-			/*free(stack);**/
+			global_stack = *stack; 
 		}
 }
