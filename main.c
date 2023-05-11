@@ -42,7 +42,7 @@ int main(int argc, char** argv)
 	size_t buffsize = 0;
 	stack_t *new_node = NULL;
 
-	if (argc > 2)
+	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
