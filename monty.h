@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -47,6 +48,7 @@ void _add(stack_t **stack, unsigned int line_number);
 void _nop(stack_t **stack, unsigned int line_number);
 int op_exec(stack_t *new_node, char *line, unsigned int line_number);
 stack_t *create_node(int n);
+int _isdigit(int c);
 
 #endif
 

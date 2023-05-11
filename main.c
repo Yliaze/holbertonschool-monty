@@ -26,18 +26,27 @@ int op_exec(stack_t *new_node, char *line, unsigned int line_number)
 		}
 		counter++;
 	}
-	return (0);
+	if (op_select[counter].f == NULL)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, line);
+		exit(EXIT_FAILURE);
+	}
+	return(0);
 }
 
 int main(int argc, char** argv)
 {
-	(void) argc;
 	FILE *fptr = NULL;
 	char *line = NULL, **token;
 	int iline = 0, read = 0, line_number = 0;
 	size_t buffsize = 0;
 	stack_t *new_node = NULL;
 
+	if (argc > 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 	global_stack = calloc(3, sizeof(stack_t));
 	global_stack->n = 0;
 	global_stack->next = NULL;
@@ -47,12 +56,7 @@ int main(int argc, char** argv)
 
 	if (fptr == NULL)
 	{
-		//fclose(fptr);
-		exit(EXIT_FAILURE);
-	}
-	if (argv[1] == NULL || fptr == NULL)
-	{
-		printf("USAGE: monty file\n");
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 
@@ -63,7 +67,14 @@ int main(int argc, char** argv)
 		token = cut_line(line);
 		if (token[1])
 		{
+			if (isdigit(*token[1]) > 0)
+			{
 			iline = atoi(token[1]);
+			}
+			else
+			{
+				iline = *token[1];
+			}
 		}
 		new_node = create_node(iline);		
 		op_exec(new_node, line, line_number);
