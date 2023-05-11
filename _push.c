@@ -12,7 +12,6 @@ void _push(stack_t **stack, unsigned int line_number)
 	if(global_stack->n == 0)
 		{
 			global_stack->n = (*stack)->n;
-			printf("ça marche = %d\n", global_stack->n);
 		}
 	else 
 		{

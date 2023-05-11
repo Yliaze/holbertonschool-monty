@@ -8,7 +8,6 @@
 **/
 char **cut_line(char *line)
 {
-	//int counter = 0;
 	char **save_token;
 	int counter = 0;
 
@@ -24,11 +23,6 @@ char **cut_line(char *line)
 	while (token != NULL)
 	{	
 		save_token[counter] = strdup(token);
-		//if (save_token[counter] == NULL)
-		//{
-			//free_arr (save_token);
-			//print une error
-		//}
 		token = strtok(NULL, " \n");
 		counter++;
 	}

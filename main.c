@@ -21,7 +21,6 @@ int op_exec(stack_t *new_node, char *line, unsigned int line_number)
 	{
 		if (strcmp(op_select[counter].opcode, line) == 0)
 		{
-			printf("instruction trouvée\n");
 			op_select[counter].f(&new_node, line_number);
 			break;
 		}
@@ -42,7 +41,7 @@ int main(int argc, char** argv)
 	global_stack->n = 0;
 	global_stack->next = NULL;
 	global_stack->prev = NULL;
-	
+
 	fptr = fopen(argv[1], "r");
 
 	if (fptr == NULL)
@@ -59,33 +58,20 @@ int main(int argc, char** argv)
 	while ((read = getline(&line,&buffsize, fptr)) != -1)
 	{
 	
-		line_number++;	
-		
+		line_number++;		
 		token = cut_line(line);
-
-		printf("avant atoi\n");
-		
 		if (token[1])
 		{
 			iline = atoi(token[1]);
 		}
-		printf("line = %s\n", line);
-		printf("après atoi\n");
-
-		new_node = create_node(iline);
-		printf("après create_node\n");
-		printf("new_node->n = %d\n", new_node->n);
-		
+		new_node = create_node(iline);		
 		op_exec(new_node, line, line_number);
-		printf("après op_exec\n");
-		
 	}
 	fclose(fptr);
 	if (line)
 	{
 		free(line);
 	}
-	printf("nombre de lignes : %d\n", line_number);
 	exit(EXIT_SUCCESS);
 }
 
