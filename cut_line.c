@@ -10,22 +10,25 @@ char **cut_line(char *line)
 {
 	char **save_token;
 	int counter = 0;
+	char *token = NULL;
 
-	save_token = calloc(3, sizeof(char*));
+	
+	save_token = malloc(3 * sizeof(char*));
 	if (save_token == NULL)
 	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	char *token = strtok(line, " \n");
+	token = strtok(line, " $\n\t");
 
 	while (token != NULL)
 	{	
 		save_token[counter] = strdup(token);
-		token = strtok(NULL, " \n");
+		token = strtok(NULL, " $\n\t");
 		counter++;
 	}
+	free(token);
 	save_token[counter] = NULL;
 	return (save_token);
 }

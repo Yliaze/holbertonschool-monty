@@ -10,6 +10,12 @@ stack_t *create_node(int n)
 {
 	stack_t *new_node = NULL;
 
+	// if (n == 0)
+	// {
+	// 	fprintf(stderr, "Lnumero: usage: push integer\n");
+	// 		exit(EXIT_FAILURE);
+	// }
+
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{

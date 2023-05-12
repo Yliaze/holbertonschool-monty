@@ -14,12 +14,9 @@ void _pall(stack_t **stack, unsigned int ligne_number)
 
     tmp = global_stack;
 
-    if (tmp->n != 0)
-        {   
-        while (tmp != NULL)
-            {
+    while (tmp)
+    {
             printf("%d\n",tmp->n);
             tmp = tmp->next;
-            }
-        }
+    }
 }

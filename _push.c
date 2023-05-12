@@ -7,27 +7,20 @@
  */
 void _push(stack_t **stack, unsigned int line_number)
 {
-	(void) line_number;
 	int check;
 	int value;
 	
+	if (stack == NULL || !*stack)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 
-	if(global_stack->n == 0)
-		{
-			global_stack->n = (*stack)->n;
-		}
+	if (global_stack == NULL)
+			global_stack = *stack;
 	else 
 		{
 			(*stack)->next = global_stack;
 			global_stack = *stack; 
 		}
-	
-	value = (*stack)->n;
-	check = isdigit(value + '0');
-	
-	if (check == 0)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
 }

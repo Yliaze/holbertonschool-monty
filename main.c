@@ -17,10 +17,11 @@ int op_exec(stack_t *new_node, char *line, unsigned int line_number)
 		{'\0', NULL}
 	};
 
-	while (op_select[counter].opcode != NULL)
+	while (op_select[counter].opcode != 0)
 	{
 		if (strcmp(op_select[counter].opcode, line) == 0)
 		{
+		
 			op_select[counter].f(&new_node, line_number);
 			break;
 		}
@@ -47,10 +48,6 @@ int main(int argc, char** argv)
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	global_stack = calloc(3, sizeof(stack_t));
-	global_stack->n = 0;
-	global_stack->next = NULL;
-	global_stack->prev = NULL;
 
 	fptr = fopen(argv[1], "r");
 
@@ -62,24 +59,31 @@ int main(int argc, char** argv)
 
 	while ((read = getline(&line,&buffsize, fptr)) != -1)
 	{
-	
+		new_node = NULL;
 		line_number++;		
 		token = cut_line(line);
-		if (token[1])
+		
+		if (token && token[1])
 		{
-			if (isdigit(*token[1]) > 0)
+			// Replace is digit by your own custom function that help to check each digit and that handle negative numbers
+			if (atoichecker(token[1], line_number) == 0)
 			{
-			iline = atoi(token[1]);
-			}
-			else
-			{
-				iline = *token[1];
+				iline = atoi(token[1]);
+				new_node = create_node(iline);
 			}
 		}
-		new_node = create_node(iline);		
+		
 		op_exec(new_node, line, line_number);
 	}
 	fclose(fptr);
+	if (new_node)
+		free(new_node);
+	free_list(global_stack);
+	if (token)
+	{
+		free_arr(token);
+		free(token);
+	}
 	if (line)
 	{
 		free(line);
