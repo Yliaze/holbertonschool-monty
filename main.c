@@ -62,6 +62,10 @@ int main(int argc, char** argv)
 		new_node = NULL;
 		line_number++;		
 		token = cut_line(line);
+		if (!token[0])
+		{
+			continue;
+		}
 		
 		if (token && token[1])
 		{
@@ -73,17 +77,10 @@ int main(int argc, char** argv)
 			}
 		}
 		
-		op_exec(new_node, line, line_number);
+		op_exec(new_node, token[0], line_number);
 	}
 	fclose(fptr);
-	if (new_node)
-		free(new_node);
-	free_list(global_stack);
-	if (token)
-	{
-		free_arr(token);
-		free(token);
-	}
+
 	if (line)
 	{
 		free(line);
