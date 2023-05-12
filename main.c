@@ -69,7 +69,6 @@ int main(int argc, char** argv)
 		
 		if (token && token[1])
 		{
-			// Replace is digit by your own custom function that help to check each digit and that handle negative numbers
 			if (atoichecker(token[1], line_number) == 0)
 			{
 				iline = atoi(token[1]);
@@ -78,11 +77,11 @@ int main(int argc, char** argv)
 		}
 		op_exec(new_node, token[0], line_number);
 
-		free(token);
-		 if (new_node)
-        {
-            free(new_node);
-        }
+		//  if (new_node != NULL)
+        // {
+        //     free(new_node);
+        // }
+		free_arr(token);
 	}
 	if (line)
 	{

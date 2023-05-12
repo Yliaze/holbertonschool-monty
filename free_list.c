@@ -1,10 +1,8 @@
 #include "monty.h"
 
 /**
- * free_list - free a linked list
- *
+ * free_list - free a double linked list
  * @head: The original linked list.
- *
  * Return: 0
  */
 void free_list(stack_t *head)
@@ -18,4 +16,5 @@ void free_list(stack_t *head)
 		node = node->next;
         free(tmp);
 	}
+    head = NULL;
 }
