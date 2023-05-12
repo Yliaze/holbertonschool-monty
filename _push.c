@@ -7,9 +7,6 @@
  */
 void _push(stack_t **stack, unsigned int line_number)
 {
-	int check;
-	int value;
-	
 	if (stack == NULL || !*stack)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
