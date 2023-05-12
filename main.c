@@ -10,10 +10,10 @@ int op_exec(stack_t *new_node, char *line, unsigned int line_number)
 		{"push", _push},
 		{"pall", _pall},
 		 /*{"pint", _pint},
-		 *{"pop", _pop},
-		 *{"swap", _swap},
-		 *{"add", _add},
-		 *{"nop", _nop},**/
+		 *{"pop", _pop},*/
+		{"swap", _swap},
+		 /*{"add", _add},*/
+		{"nop", _nop},
 		{'\0', NULL}
 	};
 
@@ -76,15 +76,20 @@ int main(int argc, char** argv)
 				new_node = create_node(iline);
 			}
 		}
-		
 		op_exec(new_node, token[0], line_number);
-	}
-	fclose(fptr);
 
+		free(token);
+		 if (new_node)
+        {
+            free(new_node);
+        }
+	}
 	if (line)
 	{
 		free(line);
 	}
+	free_list(global_stack);
+	fclose(fptr);
 	exit(EXIT_SUCCESS);
 }
 
