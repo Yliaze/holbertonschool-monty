@@ -3,7 +3,6 @@
 /**
  * create_node - Creates a new node for a doubly linked list.
  * @n: The value to store in the new node.
- *
  * Return: A pointer to the new node.
  */
 stack_t *create_node(int n)

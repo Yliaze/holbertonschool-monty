@@ -12,9 +12,9 @@ void free_list(stack_t *head)
 
 	while (node != NULL)
 	{
-        tmp = node;	
+		tmp = node;
 		node = node->next;
-        free(tmp);
+		free(tmp);
 	}
-    head = NULL;
+	head = NULL;
 }
