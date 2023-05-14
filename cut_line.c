@@ -8,7 +8,7 @@
 char **cut_line(char *line)
 {
 	char **save_token;
-	int counter = 0;
+	int counter = 0, counter2 = 0;
 	char *token = NULL;
 
 	save_token = malloc(3 * sizeof(char *));
@@ -20,13 +20,13 @@ char **cut_line(char *line)
 
 	token = strtok(line, " $\n\t");
 
-	while (token != NULL)
+	while (token != NULL && counter2 <= 1)
 	{
 		save_token[counter] = strdup(token);
 		token = strtok(NULL, " $\n\t");
 		counter++;
+		counter2++;
 	}
-	free(token);
 	save_token[counter] = NULL;
 	return (save_token);
 }
