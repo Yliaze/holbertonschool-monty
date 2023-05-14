@@ -76,8 +76,7 @@ int main(int argc, char **argv)
 		token = cut_line(line);
 		if (!token[0])
 			continue;
-
-		if (token && token[1])
+		if (token && token[1] && strcmp(token[0], "push") == 0)
 		{
 			if (atoichecker(token[1], line_number) == 0)
 			{
