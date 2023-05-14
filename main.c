@@ -21,7 +21,7 @@ int op_exec(stack_t *new_node, char *line, unsigned int line_number)
 		{"pint", _pint},
 		{"pop", _pop},
 		{"swap", _swap},
-		/*{"add", _add},*/
+		{"add", _add},
 		{"nop", _nop},
 		{'\0', NULL}
 	};
